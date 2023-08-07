@@ -888,13 +888,13 @@ var CallTrk = window.CallTrk;
         },
         source_trackers: [],
         endpoints: {
-            multiswap_session: "//api.leadgen.pennysaver.in/swap_session.js",
-            integration_retry: "//api.leadgen.pennysaver.in/icap.js",
-            form_capture: "//api.leadgen.pennysaver.in/form_capture.js",
-            poll_session: "//api.leadgen.pennysaver.in/$uuid/poll.js",
-            cr_form: "//api.leadgen.pennysaver.in/forms/$formid"
+            multiswap_session: "//v2api.leadgen.pennysaver.in/swap_session.js",
+            integration_retry: "//v2api.leadgen.pennysaver.in/icap.js",
+            form_capture: "//v2api.leadgen.pennysaver.in/form_capture.js",
+            poll_session: "//v2api.leadgen.pennysaver.in/$uuid/poll.js",
+            cr_form: "//v2api.leadgen.pennysaver.in/forms/$formid"
         },
-        swap_session_host: "api.leadgen.pennysaver.in",
+        swap_session_host: "v2api.leadgen.pennysaver.in",
         session_number_target_exists: !0,
         session_exact_targets: [],
         chat_or_form_exists: null
