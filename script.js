@@ -1,4 +1,4 @@
-/*! swap.js | Copyright © 2011-2023 CallRail Inc. | License: www.callrail.com/legal */
+/*! swap.js | Copyright Â© 2011-2023 CallRail Inc. | License: www.callrail.com/legal */
 function CallTrkSwap(e) {
     for (var a in e) this[a] = e[a];
     CallTrk.pushNamespace("namespace_" + this.id, this)
