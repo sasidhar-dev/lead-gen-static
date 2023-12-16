@@ -6,8 +6,8 @@ body {
   }
   
   .header {
-    background-color: #333;
-    color: #fff;
+    background-color: #0050fc;
+    color: #ffffff;
     padding: 20px;
     text-align: center;
   }
@@ -19,7 +19,7 @@ body {
   }
   
   .hero {
-    background-color: #f1f1f1;
+    background-color: #13c4e4;
     padding: 20px;
     text-align: center;
     margin-bottom: 40px;
@@ -44,7 +44,7 @@ body {
   }
   
   .footer {
-    background-color: #333;
+    background-color: #0050fc;
     color: #fff;
     padding: 20px;
     text-align: center;
