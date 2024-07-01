@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <script>
+    // cloudwatch RUM block ---------------------------
     (function(n,i,v,r,s,c,x,z){x=window.AwsRumClient={q:[],n:n,i:i,v:v,r:r,c:c};window[n]=function(c,p){x.q.push({c:c,p:p});};z=document.createElement('script');z.async=true;z.src=s;document.head.insertBefore(z,document.head.getElementsByTagName('script')[0]);})(
       'cwr',
       'd2d79b22-23df-4bb7-9b86-a0294e07bcf4',
@@ -20,6 +22,7 @@
     );
   </script>  
   <script type="text/javascript" id="lazy-script"> 
+  // ------Gtag manager ------------------------
     function loadGtagScript(){const script = document.createElement('script');
     script.type = 'text/javascript';
     script.async = true;
@@ -40,8 +43,23 @@
   
     gtag('config', 'G-72726HN0SL');
   </script> -->
+  <!-- cdn for the dev -->
   <script src="https://lhg-dev.cdn.leadgen.pennysaver.in/HostingSwapJS/932895671/swap.js"></script>
-  
+
+  <script type="text/javascript">
+    // chatbot block
+    (function(w, d, x, id){
+      s=d.createElement('script');
+      s.src='https://dg9yx063wiiht.cloudfront.net/amazon-connect-chat-interface-client.js';
+      s.async=1;
+      s.id=id;
+      d.getElementsByTagName('head')[0].appendChild(s);
+      w[x] =  w[x] || function() { (w[x].ac = w[x].ac || []).push(arguments) };
+    })(window, document, 'amazon_connect', '56f72b49-b8b4-4bb9-ad75-c6fdbdfbd38d');
+    amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456'} });
+    amazon_connect('snippetId', 'QVFJREFIaUpTVGJkNWhNc0Q1WHpHYnFQTkJyYXN0TENLbGdHZzNOenF2d2RJblBkYlFGOUJJdTVranliT0REcy8wa1VvSi9kQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNOWlzMzZtQUE0MTdueERNV0FnRVFnQ3ZzTWdHcGh3SEwzYlk2ZmtHdkRDOVJLWHd1cXNEZk5XM1Btd2F2M29OK25CNFJpaG95RXdJazY3bEE6OmdVeS9vZTErQnRyaEExWGk1aVhiK0VCaHZjWFZxVGhoRzE2bmNRc1hDU0p5UVdEeHhKSDhVQWRRcERQZk5LRzVTVVl6Nkp2UUJ6ZU1mTFdSbUQzdGU3OTM2K2p1R2R1eG1jR0Fob0t6eElwanRvODVJVEplclZWanlPVmxmWm5pQlcrTXg3WEdmSnRzbHRxUVFpeit2YnZwd29XV0hrST0=');
+    amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown', 'application/vnd.amazonaws.connect.message.interactive', 'application/vnd.amazonaws.connect.message.interactive.response' ]);
+  </script>
   <link rel="stylesheet" href="styles.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
