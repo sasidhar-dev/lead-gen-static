@@ -19,14 +19,27 @@
       }
     );
   </script>  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-72726HN0SL"></script>
+  <script type="text/javascript" id="lazy-script"> 
+    function loadGtagScript(){const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+    // specifically this line below makes PageView get's properly triggered and fired
+    script.onload = () => { dataLayer.push({'gtm.start': new Date().getTime(),event:'gtm.js'}); };
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-72726HN0SL';
+    document.head.appendChild(script);
+    }function generateGAScript(){if (typeof ga === 'function'){return;
+    }else {
+    loadGtagScript();
+    }}setTimeout(generateGAScript, 5000);
+    </script>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-72726HN0SL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
   
     gtag('config', 'G-72726HN0SL');
-  </script>
+  </script> -->
   <script src="https://lhg-dev.cdn.leadgen.pennysaver.in/HostingSwapJS/932895671/swap.js"></script>
   
   <link rel="stylesheet" href="styles.css">
