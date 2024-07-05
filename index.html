@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <style>
+  <!-- <style>
     /* Hide formatting icons */
     .ccp-chat-input-bar .ccp-chat-input-formatter {
         display: none !important;
     }
-</style>
+</style> -->
 
   <script>
     // cloudwatch RUM block ---------------------------
@@ -73,8 +73,23 @@
 
   <!-- cdn for the dev -->
   <script src="https://lhg-dev.cdn.leadgen.pennysaver.in/HostingSwapJS/932895671/swap.js"></script>
+  
+  <script type="text/javascript">
+    (function(w, d, x, id){
+      s=d.createElement('script');
+      s.src='https://dg9yx063wiiht.cloudfront.net/amazon-connect-chat-interface-client.js';
+      s.async=1;
+      s.id=id;
+      d.getElementsByTagName('head')[0].appendChild(s);
+      w[x] =  w[x] || function() { (w[x].ac = w[x].ac || []).push(arguments) };
+    })(window, document, 'amazon_connect', '56f72b49-b8b4-4bb9-ad75-c6fdbdfbd38d');
+    amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456'} });
+    amazon_connect('snippetId', 'QVFJREFIaUpTVGJkNWhNc0Q1WHpHYnFQTkJyYXN0TENLbGdHZzNOenF2d2RJblBkYlFGOUJJdTVranliT0REcy8wa1VvSi9kQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNOWlzMzZtQUE0MTdueERNV0FnRVFnQ3ZzTWdHcGh3SEwzYlk2ZmtHdkRDOVJLWHd1cXNEZk5XM1Btd2F2M29OK25CNFJpaG95RXdJazY3bEE6OmdVeS9vZTErQnRyaEExWGk1aVhiK0VCaHZjWFZxVGhoRzE2bmNRc1hDU0p5UVdEeHhKSDhVQWRRcERQZk5LRzVTVVl6Nkp2UUJ6ZU1mTFdSbUQzdGU3OTM2K2p1R2R1eG1jR0Fob0t6eElwanRvODVJVEplclZWanlPVmxmWm5pQlcrTXg3WEdmSnRzbHRxUVFpeit2YnZwd29XV0hrST0=');
+    amazon_connect('supportedMessagingContentTypes', [ 'text/plain']);
+  </script>
 
-  <button id="launch-widget-btn">Chat With Us</button>
+
+  <!-- <button id="launch-widget-btn">Chat With Us</button>
 
 
   <script type="text/javascript">
@@ -127,7 +142,7 @@
     amazon_connect('onChatInitialized', function() {
         console.log('Chat initialized successfully.');
     });
-</script>
+</script> -->
 
   
 
