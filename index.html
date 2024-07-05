@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+    /* Hide formatting icons */
+    .ccp-chat-input-bar .ccp-chat-input-formatter {
+        display: none !important;
+    }
+</style>
 
   <script>
     // cloudwatch RUM block ---------------------------
@@ -70,39 +76,56 @@
 
   <button id="launch-widget-btn">Chat With Us</button>
 
-<script type="text/javascript">
- (function(w, d, x, id){
-    s=d.createElement("script");
-    s.src="https://dg9yx063wiiht.cloudfront.net/amazon-connect-chat-interface-client.js"; // Correct URL
-    s.async=1;
-    s.id=id;
-    d.getElementsByTagName("head")[0].appendChild(s);
-    w[x] =  w[x] || function() { (w[x].ac = w[x].ac || []).push(arguments) };
-  })(window, document, 'amazon_connect', '56f72b49-b8b4-4bb9-ad75-c6fdbdfbd38d');
-  
-  amazon_connect('styles', { 
-      openChat: { color: '#000', backgroundColor: '#3498fe' }, 
-      closeChat: { color: '#fff', backgroundColor: '#123456' }
-  });
-  
-  amazon_connect('snippetId', 'QVFJREFIaUpTVGJkNWhNc0Q1WHpHYnFQTkJyYXN0TENLbGdHZzNOenF2d2RJblBkYlFGOUJJdTVranliT0REcy8wa1VvSi9kQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNOWlzMzZtQUE0MTdueERNV0FnRVFnQ3ZzTWdHcGh3SEwzYlk2ZmtHdkRDOVJLWHd1cXNEZk5XM1Btd2F2M29OK25CNFJpaG95RXdJazY3bEE6OmdVeS9vZTErQnRyaEExWGk1aVhiK0VCaHZjWFZxVGhoRzE2bmNRc1hDU0p5UVdEeHhKSDhVQWRRcERQZk5LRzVTVVl6Nkp2UUJ6ZU1mTFdSbUQzdGU3OTM2K2p1R2R1eG1jR0Fob0t6eElwanRvODVJVEplclZWanlPVmxmWm5pQlcrTXg3WEdmSnRzbHRxUVFpeit2YnZwd29XV0hrST0=');
-  
-  // Restrict messaging content types to plain text only
-  amazon_connect('supportedMessagingContentTypes', [ 'text/plain' ]);
 
-  amazon_connect('customLaunchBehavior', {
+  <script type="text/javascript">
+    (function(w, d, x, id){
+        s=d.createElement("script");
+        s.src="https://dg9yx063wiiht.cloudfront.net/amazon-connect-chat-interface-client.js"; // Correct URL
+        s.async=1;
+        s.id=id;
+        s.onload = function() {
+            console.log('Amazon Connect script loaded successfully.');
+        };
+        s.onerror = function() {
+            console.error('Error loading Amazon Connect script.');
+        };
+        d.getElementsByTagName("head")[0].appendChild(s);
+        w[x] =  w[x] || function() { (w[x].ac = w[x].ac || []).push(arguments) };
+    })(window, document, 'amazon_connect', '56f72b49-b8b4-4bb9-ad75-c6fdbdfbd38d');
+
+    amazon_connect('styles', { 
+        openChat: { color: '#000', backgroundColor: '#3498fe' }, 
+        closeChat: { color: '#fff', backgroundColor: '#123456' }
+    });
+
+    amazon_connect('snippetId', 'QVFJREFIaUpTVGJkNWhNc0Q1WHpHYnFQTkJyYXN0TENLbGdHZzNOenF2d2RJblBkYlFGOUJJdTVranliT0REcy8wa1VvSi9kQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNOWlzMzZtQUE0MTdueERNV0FnRVFnQ3ZzTWdHcGh3SEwzYlk2ZmtHdkRDOVJLWHd1cXNEZk5XM1Btd2F2M29OK25CNFJpaG95RXdJazY3bEE6OmdVeS9vZTErQnRyaEExWGk1aVhiK0VCaHZjWFZxVGhoRzE2bmNRc1hDU0p5UVdEeHhKSDhVQWRRcERQZk5LRzVTVVl6Nkp2UUJ6ZU1mTFdSbUQzdGU3OTM2K2p1R2R1eG1jR0Fob0t6eElwanRvODVJVEplclZWanlPVmxmWm5pQlcrTXg3WEdmSnRzbHRxUVFpeit2YnZwd29XV0hrST0=');
+
+    // Restrict messaging content types to plain text only
+    amazon_connect('supportedMessagingContentTypes', [ 'text/plain' ]);
+
+    amazon_connect('customLaunchBehavior', {
         skipIconButtonAndAutoLaunch: true,
         alwaysHideWidgetButton: true,
         programmaticLaunch: (function(launchCallback) {
             var launchWidgetBtn = document.getElementById('launch-widget-btn');
             if (launchWidgetBtn) {
-                launchWidgetBtn.addEventListener('click', launchCallback);
+                launchWidgetBtn.addEventListener('click', function() {
+                    console.log('Chat widget launch button clicked.');
+                    launchCallback();
+                });
                 window.onunload = function() {
                     launchWidgetBtn.removeEventListener('click', launchCallback);
                     return;
                 }
+            } else {
+                console.error('Launch widget button not found.');
             }
         }),
+    });
+
+    // Optional: Log a message when the chat is initialized
+    amazon_connect('onChatInitialized', function() {
+        console.log('Chat initialized successfully.');
     });
 </script>
 
