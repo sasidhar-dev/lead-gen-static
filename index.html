@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- <style>
     /* Hide formatting icons */
@@ -10,7 +11,7 @@
 
   <script>
     // cloudwatch RUM block ---------------------------
-    (function(n,i,v,r,s,c,x,z){x=window.AwsRumClient={q:[],n:n,i:i,v:v,r:r,c:c};window[n]=function(c,p){x.q.push({c:c,p:p});};z=document.createElement('script');z.async=true;z.src=s;document.head.insertBefore(z,document.head.getElementsByTagName('script')[0]);})(
+    (function (n, i, v, r, s, c, x, z) { x = window.AwsRumClient = { q: [], n: n, i: i, v: v, r: r, c: c }; window[n] = function (c, p) { x.q.push({ c: c, p: p }); }; z = document.createElement('script'); z.async = true; z.src = s; document.head.insertBefore(z, document.head.getElementsByTagName('script')[0]); })(
       'cwr',
       'd2d79b22-23df-4bb7-9b86-a0294e07bcf4',
       '1.0.0',
@@ -21,12 +22,12 @@
         guestRoleArn: "arn:aws:iam::382625484581:role/RUM-Monitor-us-east-1-382625484581-9467346556861-Unauth",
         identityPoolId: "us-east-1:a18b344d-74fc-4759-aae9-e09be65e7c49",
         endpoint: "https://dataplane.rum.us-east-1.amazonaws.com",
-        telemetries: ["performance","errors","http"],
+        telemetries: ["performance", "errors", "http"],
         allowCookies: true,
         enableXRay: true
       }
     );
-  </script>  
+  </script>
   <!-- <script type="text/javascript" id="lazy-script"> 
   // ------Gtag manager ------------------------
     function loadGtagScript(){const script = document.createElement('script');
@@ -51,30 +52,30 @@
   </script>  -->
 
   <script>
-    setTimeout(function() {
+    setTimeout(function () {
       var script = document.createElement('script');
       script.src = 'https://www.googletagmanager.com/gtag/js?id=G-72726HN0SL';
       script.async = true;
       document.head.appendChild(script);
-  
-      script.onload = function() {
+
+      script.onload = function () {
         window.dataLayer = window.dataLayer || [];
-        
+
         function gtag() {
           dataLayer.push(arguments);
         }
-  
+
         gtag('js', new Date());
         gtag('config', 'G-72726HN0SL');
       };
     }, 5000); 
   </script>
-  
+
 
   <!-- cdn for the dev -->
   <script src="https://lhg-dev.cdn.leadgen.pennysaver.in/HostingSwapJS/932895671/swap.js"></script>
-  
-  <script type="text/javascript">
+
+  <!-- <script type="text/javascript">
     (function(w, d, x, id){
       s=d.createElement('script');
       s.src='https://dg9yx063wiiht.cloudfront.net/amazon-connect-chat-interface-client.js';
@@ -86,6 +87,20 @@
     amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456'} });
     amazon_connect('snippetId', 'QVFJREFIaUpTVGJkNWhNc0Q1WHpHYnFQTkJyYXN0TENLbGdHZzNOenF2d2RJblBkYlFGOUJJdTVranliT0REcy8wa1VvSi9kQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNOWlzMzZtQUE0MTdueERNV0FnRVFnQ3ZzTWdHcGh3SEwzYlk2ZmtHdkRDOVJLWHd1cXNEZk5XM1Btd2F2M29OK25CNFJpaG95RXdJazY3bEE6OmdVeS9vZTErQnRyaEExWGk1aVhiK0VCaHZjWFZxVGhoRzE2bmNRc1hDU0p5UVdEeHhKSDhVQWRRcERQZk5LRzVTVVl6Nkp2UUJ6ZU1mTFdSbUQzdGU3OTM2K2p1R2R1eG1jR0Fob0t6eElwanRvODVJVEplclZWanlPVmxmWm5pQlcrTXg3WEdmSnRzbHRxUVFpeit2YnZwd29XV0hrST0=');
     amazon_connect('supportedMessagingContentTypes', [ 'text/plain']);
+  </script> -->
+
+  <script type="text/javascript">
+    (function (w, d, x, id) {
+      s = d.createElement('script');
+      s.src = 'https://dtn7rvxwwlhud.cloudfront.net/amazon-connect-chat-interface-client.js';
+      s.async = 1;
+      s.id = id;
+      d.getElementsByTagName('head')[0].appendChild(s);
+      w[x] = w[x] || function () { (w[x].ac = w[x].ac || []).push(arguments) };
+    })(window, document, 'amazon_connect', '2bbef40d-4c62-4aaa-902e-f999367c5a58');
+    amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456' } });
+    amazon_connect('snippetId', 'QVFJREFIaWFZYXRVSlpIekdkUUg5YXhZenVQMktKRXNIWTVFQWpBYVErTEdzRnpvZHdFYkM5cU9Bc1NKeU9jRlZZM0hEM1pIQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNVjgwdlBWUjNrbVU5N3pUb0FnRVFnQ3VxbzVBbjk2bTBOQlgzdWM5eHdyWmVTQVRzT0RkakFyL3IzLzNDSmRDenBHU0NnYWtmZldaUWM4YTk6OldFbkhUOTJsZmpkWXRaL3ozSzdsN2ZOZS8rei81S2VhQklRdCtIYWhteXNER0hydVFFQ2QvalRxQk1Ub0kzcU1KQXZtUHQvZlVpU3l4Yms2OUN2S1ByMk9xK04xMCtaQXJIc1k3Um1oN1M1a2I0UGVZay9YSUtVWGZ1M1JzSFFQSFNsRjRlVHU1TEpaV0U0bWVFUDdwaHBKcyswZjQyUT0=');
+    amazon_connect('supportedMessagingContentTypes', ['text/plain', 'application/vnd.amazonaws.connect.message.interactive', 'application/vnd.amazonaws.connect.message.interactive.response']);
   </script>
 
 
@@ -144,13 +159,14 @@
     });
 </script> -->
 
-  
+
 
   <link rel="stylesheet" href="styles.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us</title>
 </head>
+
 <body>
   <div class="header">
     <h1>Home Gaurd</h1>
@@ -189,17 +205,28 @@
 
     <div class="contact-section">
       <h2>Help is on the Way</h2>
-      <p>Pay your service call fee and manage your claim online. We’ll try to have a technician to you within 24-48 hours*.</p>
+      <p>Pay your service call fee and manage your claim online. We’ll try to have a technician to you within 24-48
+        hours*.</p>
       <p>*majority of claims have a technician on site within 24-48 business hours.</p>
     </div>
 
-    
+
 
     <div class="contact-section">
       <h2>What is a Home Warranty?</h2>
-      <p>A home warranty is a service contract that covers repair and replacement costs when your home’s systems and appliances break down due to normal wear and tear. Liberty Home Guard oversees the process of repairing your home equipment from start to finish. Our network of state-licensed technicians ensures you have access to the highest quality workmanship and technical expertise.</p>
-      <p>A home warranty is an excellent complement to standard homeowner’s insurance. Insurance typically covers damages resulting from disaster, accident, or theft. It does not cover appliance breakdowns, home system repair, or home maintenance services—such coverage is the domain of home warranties. A homeowner with both a home warranty and home insurance policy enjoys more thorough and robust financial protection.</p>
-      <p>A home warranty is especially useful when a big-ticket item, such as a furnace or refrigerator, breaks down. Without financial protection, such major appliances can cost several hundreds or thousands of dollars to repair. A home warranty protects you from such exorbitant out-of-pocket expenses. A Liberty Home Guard plan can be yours for as little as $1 per day. Our coverage does not require an inspection of your home’s systems and appliances, and we’ll cover virtually any working appliance, regardless of age.</p>
+      <p>A home warranty is a service contract that covers repair and replacement costs when your home’s systems and
+        appliances break down due to normal wear and tear. Liberty Home Guard oversees the process of repairing your
+        home equipment from start to finish. Our network of state-licensed technicians ensures you have access to the
+        highest quality workmanship and technical expertise.</p>
+      <p>A home warranty is an excellent complement to standard homeowner’s insurance. Insurance typically covers
+        damages resulting from disaster, accident, or theft. It does not cover appliance breakdowns, home system repair,
+        or home maintenance services—such coverage is the domain of home warranties. A homeowner with both a home
+        warranty and home insurance policy enjoys more thorough and robust financial protection.</p>
+      <p>A home warranty is especially useful when a big-ticket item, such as a furnace or refrigerator, breaks down.
+        Without financial protection, such major appliances can cost several hundreds or thousands of dollars to repair.
+        A home warranty protects you from such exorbitant out-of-pocket expenses. A Liberty Home Guard plan can be yours
+        for as little as $1 per day. Our coverage does not require an inspection of your home’s systems and appliances,
+        and we’ll cover virtually any working appliance, regardless of age.</p>
     </div>
   </div>
 
@@ -214,4 +241,5 @@
     </p>
   </div>
 </body>
+
 </html>
