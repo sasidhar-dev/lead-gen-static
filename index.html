@@ -119,6 +119,12 @@
       });
     }
 
+    amazon_connect('registerCallback', {
+       'AUTHENTICATION_INITIATED' : (eventName, data) => {
+            console.log(data.state,'data')
+        },
+      });
+
   </script>
 
 
