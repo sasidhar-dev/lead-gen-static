@@ -108,8 +108,15 @@
 
     // Extract 'code' and 'state' from the URL after Cognito redirects
     const urlParams = new URLSearchParams(window.location.search);
+    console.log("helio");
+
+    console.log(urlParams);
     const authCode = urlParams.get('code');
+    console.log(authCode);
+
     const state = urlParams.get('state');
+    console.log(state);
+
 
     // Send authentication update to Amazon Connect
     if (authCode && state) {
