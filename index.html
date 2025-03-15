@@ -89,7 +89,7 @@
     amazon_connect('supportedMessagingContentTypes', [ 'text/plain']);
   </script> -->
 
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     (function (w, d, x, id) {
       s = d.createElement('script');
       s.src = 'https://dtn7rvxwwlhud.cloudfront.net/amazon-connect-chat-interface-client.js';
@@ -114,7 +114,7 @@
     const authCode = urlParams.get('code');
     console.log(authCode);
 
-    const state = urlParams.get('state');
+    const state = urlParams.get('state');  
     console.log(state);
 
 
@@ -132,6 +132,20 @@
         },
       });
 
+  </script> -->
+
+  <script type="text/javascript">
+    (function(w, d, x, id){
+      s=d.createElement('script');
+      s.src='https://dg9yx063wiiht.cloudfront.net/amazon-connect-chat-interface-client.js';
+      s.async=1;
+      s.id=id;
+      d.getElementsByTagName('head')[0].appendChild(s);
+      w[x] =  w[x] || function() { (w[x].ac = w[x].ac || []).push(arguments) };
+    })(window, document, 'amazon_connect', '73b3e46e-3cd3-409e-8e41-f32f74691fb1');
+    amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456'} });
+    amazon_connect('snippetId', 'QVFJREFIZ2ZibWFadU4zTkUyWUNVS0FvbU5BRE5qL1ArWTQrQnJpaHhVN0FNZE0wNmdGTFlvQzU1RGZLUHFxRVNkRUhKU0IvQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNMkNTekpuVHBQZDNnb1NuZUFnRVFnQ3NzK2NWVk9DQjlIS3E2L2RJd2RxNTBKUGhpb0FYWXRhTmthRVorRVgyYnJtNjk5OHF0bERnSVRPRHo6OmZ6YStLd2F1L1ZxTzM4dnBKZXhOWWRuV2hxVXVmSDI5ZCtjL1pzelhac1FpK2U3VHRRM0FrRStuczNmZmEwb3VkY0grbHRXM0tqZjVCU3BlUi9LdFpHMEJkUEszcXRUZzV6TEwzOXVLcUFzNzRIMzdiWnVaMUJpWm5NdERGWkVPOVo3aWlrdVljeWN2VzNIMEo1NlowTXczbEM4RTQ2ST0=');
+    amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown', 'application/vnd.amazonaws.connect.message.interactive', 'application/vnd.amazonaws.connect.message.interactive.response' ]);
   </script>
 
 
