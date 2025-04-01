@@ -99,6 +99,7 @@
       w[x] = w[x] || function () { (w[x].ac = w[x].ac || []).push(arguments) };
     })(window, document, 'amazon_connect', '2bbef40d-4c62-4aaa-902e-f999367c5a58');
     
+    // Chatbot styling configuration
     amazon_connect('styles', { 
       iconType: 'CHAT', 
       openChat: { color: '#ffffff', backgroundColor: '#123456' }, 
@@ -117,23 +118,29 @@
     // Initialize with authentication parameters
     amazon_connect('authenticationParameters', {
       redirectUri: 'https://www.dev.chatbot.pennysaver.in',
-      identityProvider: 'COGNITO' // Explicitly set identity provider
+      identityProvider: 'COGNITO'
     });
   
-    // Handle the authentication flow
+    // Handle the authentication callback when returning from Cognito
     const urlParams = new URLSearchParams(window.location.search);
     const authCode = urlParams.get('code');
     const state = urlParams.get('state');
   
     if (authCode && state) {
-      // If we have code and state, this is the callback from Cognito
+      console.log('Received authentication callback with code and state');
+      
       amazon_connect('updateParticipantAuthentication', {
         code: authCode,
         state: state
       }, function(response) {
-        // Close the popup after successful authentication
-        if (window.opener) {
+        console.log('Authentication update response:', response);
+        
+        // If this is the popup window, close it after successful auth
+        if (window.opener && !window.opener.closed) {
           window.close();
+        } else {
+          // If not a popup or opener is closed, refresh the chat interface
+          amazon_connect('initiateAuth');
         }
       });
     }
@@ -142,31 +149,43 @@
     amazon_connect('registerCallback', {
       'AUTHENTICATION_INITIATED': (eventName, data) => {
         console.log('Authentication initiated:', data);
-        // Open Cognito hosted UI in a popup
-        const popup = window.open(
-          data.signInUrl, 
-          'cognitoAuth', 
-          'width=500,height=600'
-        );
+        // Store the state for later verification
+        sessionStorage.setItem('cognitoAuthState', data.state);
         
-        // Check if popup is closed (for some browsers)
-        const timer = setInterval(() => {
-          if (popup.closed) {
-            clearInterval(timer);
-            // Handle case where user closed the popup without auth
-            console.log('Popup closed without authentication');
-          }
-        }, 500);
+        // Open Cognito hosted UI in a popup ONLY when user clicks to authenticate
+        // This won't auto-open now
+      },
+      
+      'ON_CHAT_ICON_CLICK': (eventName, data) => {
+        console.log('Chat icon clicked:', data);
+        // Check if we need to authenticate
+        const authState = sessionStorage.getItem('cognitoAuthState');
+        if (!authState) {
+          // Only initiate auth when needed
+          amazon_connect('initiateAuth');
+        }
       },
       
       'AUTHENTICATION_SUCCESSFUL': (eventName, data) => {
         console.log('Authentication successful:', data);
-        // Refresh the chat interface or show authenticated state
+        // Clear the stored state
+        sessionStorage.removeItem('cognitoAuthState');
+        // Refresh the chat interface
+        amazon_connect('initiateChat');
       },
       
       'AUTHENTICATION_FAILED': (eventName, data) => {
         console.log('Authentication failed:', data);
+        // Clear the stored state
+        sessionStorage.removeItem('cognitoAuthState');
         // Show appropriate message to user
+        alert('Authentication failed. Please try again.');
+      },
+      
+      'CHAT_ENDED': (eventName, data) => {
+        console.log('Chat ended:', data);
+        // Clear authentication state when chat ends
+        sessionStorage.removeItem('cognitoAuthState');
       }
     });
   </script>
