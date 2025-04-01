@@ -98,54 +98,75 @@
       d.getElementsByTagName('head')[0].appendChild(s);
       w[x] = w[x] || function () { (w[x].ac = w[x].ac || []).push(arguments) };
     })(window, document, 'amazon_connect', '2bbef40d-4c62-4aaa-902e-f999367c5a58');
-    amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456' } });
-    amazon_connect('snippetId', 'QVFJREFIaWFZYXRVSlpIekdkUUg5YXhZenVQMktKRXNIWTVFQWpBYVErTEdzRnpvZHdFYkM5cU9Bc1NKeU9jRlZZM0hEM1pIQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNVjgwdlBWUjNkbVU5N3pUb0FnRVFnQ3VxbzVBbjk2bTBOQlgzdWM5eHdyWmVTQVRzT0RkakFyL3IzLzNDSmRDenBHU0NnYWtmZldaUWM4YTk6OldFbkhUOTJsZmpkWXRaL3ozSzdsN2ZOZS8rei81S2VhQklRdCtIYWhteXNER0hydVFFQ2QvalRxQk1Ub0kzcU1KQXZtUHQvZlVpU3l4Yms2OUN2S1ByMk9xK04xMCtaQXJIc1k3Um1oN1M1a2I0UGVZay9YSUtVWGZ1M1JzSFFQSFNsRjRlVHU1TEpaV0U0bWVFUDdwaHBKcyswZjQyUT0=');
-    amazon_connect('supportedMessagingContentTypes', ['text/plain', 'text/markdown', 'application/vnd.amazonaws.connect.message.interactive', 'application/vnd.amazonaws.connect.message.interactive.response']);
+    
+    amazon_connect('styles', { 
+      iconType: 'CHAT', 
+      openChat: { color: '#ffffff', backgroundColor: '#123456' }, 
+      closeChat: { color: '#ffffff', backgroundColor: '#123456' } 
+    });
+    
+    amazon_connect('snippetId', 'QVFJREFIaWFZYXRVSlpIekdkUUg5YXhZenVQMktKRXNIWTVFQWpBYVErTEdzRnpvZHdFYkM5cU9Bc1NKeU9jRlZZM0hEM1pIQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNVjgwdlBWUjNrbVU5N3pUb0FnRVFnQ3VxbzVBbjk2bTBOQlgzdWM5eHdyWmVTQVRzT0RkakFyL3IzLzNDSmRDenBHU0NnYWtmZldaUWM4YTk6OldFbkhUOTJsZmpkWXRaL3ozSzdsN2ZOZS8rei81S2VhQklRdCtIYWhteXNER0hydVFFQ2QvalRxQk1Ub0kzcU1KQXZtUHQvZlVpU3l4Yms2OUN2S1ByMk9xK04xMCtaQXJIc1k3Um1oN1M1a2I0UGVZay9YSUtVWGZ1M1JzSFFQSFNsRjRlVHU1TEpaV0U0bWVFUDdwaHBKcyswZjQyUT0=');
+    
+    amazon_connect('supportedMessagingContentTypes', [
+      'text/plain', 
+      'text/markdown', 
+      'application/vnd.amazonaws.connect.message.interactive', 
+      'application/vnd.amazonaws.connect.message.interactive.response'
+    ]);
+    
+    // Initialize with authentication parameters
     amazon_connect('authenticationParameters', {
       redirectUri: 'https://www.dev.chatbot.pennysaver.in',
-      identityProvider: 'us-east-1_LmKBSfDbD' // Replace with your actual Cognito user pool ID
+      identityProvider: 'COGNITO' // Explicitly set identity provider
     });
   
-    // Extract 'code' and 'state' from the URL after Cognito redirects
+    // Handle the authentication flow
     const urlParams = new URLSearchParams(window.location.search);
     const authCode = urlParams.get('code');
     const state = urlParams.get('state');
   
-    // Send authentication update to Amazon Connect
     if (authCode && state) {
+      // If we have code and state, this is the callback from Cognito
       amazon_connect('updateParticipantAuthentication', {
         code: authCode,
         state: state
+      }, function(response) {
+        // Close the popup after successful authentication
+        if (window.opener) {
+          window.close();
+        }
       });
-  
-      // Notify the main window that authentication is complete
-      if (window.opener) {
-        window.opener.postMessage({ type: 'AUTHENTICATION_COMPLETE' }, '*');
-      }
     }
   
-    // Listen for messages from the popup
-    window.addEventListener('message', (event) => {
-      if (event.data.type === 'AUTHENTICATION_COMPLETE') {
-        // Close the popup if it's open
-        if (window.openedPopup) {
-          window.openedPopup.close();
-        }
-        // Update the UI or perform other actions
-        console.log('Authentication completed');
-      }
-    });
-  
+    // Register callbacks to handle authentication events
     amazon_connect('registerCallback', {
       'AUTHENTICATION_INITIATED': (eventName, data) => {
-        console.log(data.state, 'data');
-        // Open the popup for authentication
-        const authUrl = data.authUrl; // Assuming the authUrl is provided in the data
-        window.openedPopup = window.open(authUrl, 'authPopup', 'width=500,height=600');
+        console.log('Authentication initiated:', data);
+        // Open Cognito hosted UI in a popup
+        const popup = window.open(
+          data.signInUrl, 
+          'cognitoAuth', 
+          'width=500,height=600'
+        );
+        
+        // Check if popup is closed (for some browsers)
+        const timer = setInterval(() => {
+          if (popup.closed) {
+            clearInterval(timer);
+            // Handle case where user closed the popup without auth
+            console.log('Popup closed without authentication');
+          }
+        }, 500);
       },
-      'AUTHENTICATION_COMPLETED': (eventName, data) => {
-        console.log('Authentication completed', data);
-        // Update the UI or perform other actions
+      
+      'AUTHENTICATION_SUCCESSFUL': (eventName, data) => {
+        console.log('Authentication successful:', data);
+        // Refresh the chat interface or show authenticated state
+      },
+      
+      'AUTHENTICATION_FAILED': (eventName, data) => {
+        console.log('Authentication failed:', data);
+        // Show appropriate message to user
       }
     });
   </script>
