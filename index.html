@@ -99,7 +99,7 @@
       w[x] = w[x] || function () { (w[x].ac = w[x].ac || []).push(arguments) };
     })(window, document, 'amazon_connect', '2bbef40d-4c62-4aaa-902e-f999367c5a58');
     
-    // Chatbot styling configuration
+    // Basic chatbot configuration
     amazon_connect('styles', { 
       iconType: 'CHAT', 
       openChat: { color: '#ffffff', backgroundColor: '#123456' }, 
@@ -115,77 +115,93 @@
       'application/vnd.amazonaws.connect.message.interactive.response'
     ]);
     
-    // Initialize with authentication parameters
+    // Initialize authentication parameters
     amazon_connect('authenticationParameters', {
       redirectUri: 'https://www.dev.chatbot.pennysaver.in',
       identityProvider: 'COGNITO'
     });
   
-    // Handle the authentication callback when returning from Cognito
-    const urlParams = new URLSearchParams(window.location.search);
-    const authCode = urlParams.get('code');
-    const state = urlParams.get('state');
+    // Handle the authentication callback
+    const handleAuthCallback = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const authCode = urlParams.get('code');
+      const state = urlParams.get('state');
+      const error = urlParams.get('error');
+      const errorDescription = urlParams.get('error_description');
   
-    if (authCode && state) {
-      console.log('Received authentication callback with code and state');
-      
-      amazon_connect('updateParticipantAuthentication', {
-        code: authCode,
-        state: state
-      }, function(response) {
-        console.log('Authentication update response:', response);
+      if (authCode && state) {
+        console.log('Processing authentication callback with code:', authCode);
         
-        // If this is the popup window, close it after successful auth
-        if (window.opener && !window.opener.closed) {
-          window.close();
-        } else {
-          // If not a popup or opener is closed, refresh the chat interface
-          amazon_connect('initiateAuth');
-        }
-      });
-    }
+        // Properly format the UpdateParticipantAuthentication request
+        const authUpdate = {
+          Code: authCode,
+          State: state,
+          // Note: InstanceId should be automatically handled by the SDK
+        };
   
-    // Register callbacks to handle authentication events
+        amazon_connect('updateParticipantAuthentication', authUpdate, (response) => {
+          console.log('UpdateParticipantAuthentication response:', response);
+          
+          // This is where you should see the async processing begin
+          if (window.opener) {
+            // If this is a popup, send message to parent and close
+            window.opener.postMessage({ 
+              type: 'COGNITO_AUTH_COMPLETE', 
+              success: true 
+            }, 'https://www.dev.chatbot.pennysaver.in');
+            window.close();
+          } else {
+            // If not a popup, refresh the chat
+            window.location.href = 'https://www.dev.chatbot.pennysaver.in';
+          }
+        });
+      } else if (error) {
+        console.error('Authentication error:', error, errorDescription);
+        amazon_connect('updateParticipantAuthentication', {
+          Error: error,
+          ErrorDescription: errorDescription || 'Authentication failed',
+          State: state || 'UNKNOWN_STATE'
+        });
+      }
+    };
+  
+    // Register callbacks
     amazon_connect('registerCallback', {
       'AUTHENTICATION_INITIATED': (eventName, data) => {
-        console.log('Authentication initiated:', data);
-        // Store the state for later verification
+        console.log('Auth initiated - opening popup:', data.signInUrl);
+        // Store state for verification
         sessionStorage.setItem('cognitoAuthState', data.state);
         
-        // Open Cognito hosted UI in a popup ONLY when user clicks to authenticate
-        // This won't auto-open now
-      },
-      
-      'ON_CHAT_ICON_CLICK': (eventName, data) => {
-        console.log('Chat icon clicked:', data);
-        // Check if we need to authenticate
-        const authState = sessionStorage.getItem('cognitoAuthState');
-        if (!authState) {
-          // Only initiate auth when needed
-          amazon_connect('initiateAuth');
-        }
+        // Open popup ONLY when explicitly triggered by user action
+        // This example assumes you'll trigger it via a button click
       },
       
       'AUTHENTICATION_SUCCESSFUL': (eventName, data) => {
-        console.log('Authentication successful:', data);
-        // Clear the stored state
-        sessionStorage.removeItem('cognitoAuthState');
-        // Refresh the chat interface
-        amazon_connect('initiateChat');
+        console.log('Auth successful - user profile:', data);
+        // Handle successful authentication (e.g., show chat UI)
       },
       
       'AUTHENTICATION_FAILED': (eventName, data) => {
-        console.log('Authentication failed:', data);
-        // Clear the stored state
-        sessionStorage.removeItem('cognitoAuthState');
-        // Show appropriate message to user
-        alert('Authentication failed. Please try again.');
-      },
+        console.error('Auth failed:', data);
+        // Show error to user
+      }
+    });
+  
+    // Check for auth callback when page loads
+    window.addEventListener('load', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('code') || urlParams.has('error')) {
+        handleAuthCallback();
+      }
+    });
+  
+    // Listen for messages from popup (if used)
+    window.addEventListener('message', (event) => {
+      if (event.origin !== 'https://www.dev.chatbot.pennysaver.in') return;
       
-      'CHAT_ENDED': (eventName, data) => {
-        console.log('Chat ended:', data);
-        // Clear authentication state when chat ends
-        sessionStorage.removeItem('cognitoAuthState');
+      if (event.data.type === 'COGNITO_AUTH_COMPLETE') {
+        console.log('Received auth completion message from popup');
+        amazon_connect('initiateAuth'); // Refresh auth state
       }
     });
   </script>
