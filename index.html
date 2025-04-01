@@ -99,41 +99,56 @@
       w[x] = w[x] || function () { (w[x].ac = w[x].ac || []).push(arguments) };
     })(window, document, 'amazon_connect', '2bbef40d-4c62-4aaa-902e-f999367c5a58');
     amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456' } });
-    amazon_connect('snippetId', 'QVFJREFIaWFZYXRVSlpIekdkUUg5YXhZenVQMktKRXNIWTVFQWpBYVErTEdzRnpvZHdFYkM5cU9Bc1NKeU9jRlZZM0hEM1pIQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNVjgwdlBWUjNrbVU5N3pUb0FnRVFnQ3VxbzVBbjk2bTBOQlgzdWM5eHdyWmVTQVRzT0RkakFyL3IzLzNDSmRDenBHU0NnYWtmZldaUWM4YTk6OldFbkhUOTJsZmpkWXRaL3ozSzdsN2ZOZS8rei81S2VhQklRdCtIYWhteXNER0hydVFFQ2QvalRxQk1Ub0kzcU1KQXZtUHQvZlVpU3l4Yms2OUN2S1ByMk9xK04xMCtaQXJIc1k3Um1oN1M1a2I0UGVZay9YSUtVWGZ1M1JzSFFQSFNsRjRlVHU1TEpaV0U0bWVFUDdwaHBKcyswZjQyUT0=');
+    amazon_connect('snippetId', 'QVFJREFIaWFZYXRVSlpIekdkUUg5YXhZenVQMktKRXNIWTVFQWpBYVErTEdzRnpvZHdFYkM5cU9Bc1NKeU9jRlZZM0hEM1pIQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNVjgwdlBWUjNkbVU5N3pUb0FnRVFnQ3VxbzVBbjk2bTBOQlgzdWM5eHdyWmVTQVRzT0RkakFyL3IzLzNDSmRDenBHU0NnYWtmZldaUWM4YTk6OldFbkhUOTJsZmpkWXRaL3ozSzdsN2ZOZS8rei81S2VhQklRdCtIYWhteXNER0hydVFFQ2QvalRxQk1Ub0kzcU1KQXZtUHQvZlVpU3l4Yms2OUN2S1ByMk9xK04xMCtaQXJIc1k3Um1oN1M1a2I0UGVZay9YSUtVWGZ1M1JzSFFQSFNsRjRlVHU1TEpaV0U0bWVFUDdwaHBKcyswZjQyUT0=');
     amazon_connect('supportedMessagingContentTypes', ['text/plain', 'text/markdown', 'application/vnd.amazonaws.connect.message.interactive', 'application/vnd.amazonaws.connect.message.interactive.response']);
     amazon_connect('authenticationParameters', {
       redirectUri: 'https://www.dev.chatbot.pennysaver.in',
-      identityProvider: ''
+      identityProvider: 'YOUR_COGNITO_USER_POOL_ID' // Replace with your actual Cognito user pool ID
     });
-
+  
     // Extract 'code' and 'state' from the URL after Cognito redirects
     const urlParams = new URLSearchParams(window.location.search);
-    console.log("helio");
-
-    console.log(urlParams);
     const authCode = urlParams.get('code');
-    console.log(authCode);
-
     const state = urlParams.get('state');
-    console.log(state);
-
-
+  
     // Send authentication update to Amazon Connect
     if (authCode && state) {
       amazon_connect('updateParticipantAuthentication', {
         code: authCode,
         state: state
       });
+  
+      // Notify the main window that authentication is complete
+      if (window.opener) {
+        window.opener.postMessage({ type: 'AUTHENTICATION_COMPLETE' }, '*');
+      }
     }
-
+  
+    // Listen for messages from the popup
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'AUTHENTICATION_COMPLETE') {
+        // Close the popup if it's open
+        if (window.openedPopup) {
+          window.openedPopup.close();
+        }
+        // Update the UI or perform other actions
+        console.log('Authentication completed');
+      }
+    });
+  
     amazon_connect('registerCallback', {
-       'AUTHENTICATION_INITIATED' : (eventName, data) => {
-            console.log(data.state,'data')
-        },
-      });
-
+      'AUTHENTICATION_INITIATED': (eventName, data) => {
+        console.log(data.state, 'data');
+        // Open the popup for authentication
+        const authUrl = data.authUrl; // Assuming the authUrl is provided in the data
+        window.openedPopup = window.open(authUrl, 'authPopup', 'width=500,height=600');
+      },
+      'AUTHENTICATION_COMPLETED': (eventName, data) => {
+        console.log('Authentication completed', data);
+        // Update the UI or perform other actions
+      }
+    });
   </script>
-
 
   <!-- <button id="launch-widget-btn">Chat With Us</button>
 
