@@ -90,48 +90,17 @@
   </script> -->
 
   <script type="text/javascript">
-    (function (w, d, x, id) {
-      s = d.createElement('script');
-      s.src = 'https://dtn7rvxwwlhud.cloudfront.net/amazon-connect-chat-interface-client.js';
-      s.async = 1;
-      s.id = id;
+    (function(w, d, x, id){
+      s=d.createElement('script');
+      s.src='https://athiva-liberty.my.connect.aws/connectwidget/static/amazon-connect-chat-interface-client.js';
+      s.async=1;
+      s.id=id;
       d.getElementsByTagName('head')[0].appendChild(s);
-      w[x] = w[x] || function () { (w[x].ac = w[x].ac || []).push(arguments) };
-    })(window, document, 'amazon_connect', '2bbef40d-4c62-4aaa-902e-f999367c5a58');
-    amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456' } });
-    amazon_connect('snippetId', 'QVFJREFIaWFZYXRVSlpIekdkUUg5YXhZenVQMktKRXNIWTVFQWpBYVErTEdzRnpvZHdFYkM5cU9Bc1NKeU9jRlZZM0hEM1pIQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNVjgwdlBWUjNrbVU5N3pUb0FnRVFnQ3VxbzVBbjk2bTBOQlgzdWM5eHdyWmVTQVRzT0RkakFyL3IzLzNDSmRDenBHU0NnYWtmZldaUWM4YTk6OldFbkhUOTJsZmpkWXRaL3ozSzdsN2ZOZS8rei81S2VhQklRdCtIYWhteXNER0hydVFFQ2QvalRxQk1Ub0kzcU1KQXZtUHQvZlVpU3l4Yms2OUN2S1ByMk9xK04xMCtaQXJIc1k3Um1oN1M1a2I0UGVZay9YSUtVWGZ1M1JzSFFQSFNsRjRlVHU1TEpaV0U0bWVFUDdwaHBKcyswZjQyUT0=');
-    amazon_connect('supportedMessagingContentTypes', ['text/plain', 'text/markdown', 'application/vnd.amazonaws.connect.message.interactive', 'application/vnd.amazonaws.connect.message.interactive.response']);
-    amazon_connect('authenticationParameters', {
-      redirectUri: 'https://ui.pennysaver.in',
-      identityProvider: ''
-    });
-
-    // Extract 'code' and 'state' from the URL after Cognito redirects
-    const urlParams = new URLSearchParams(window.location.search);
-    console.log("helio");
-
-    console.log(urlParams);
-    const authCode = urlParams.get('code');
-    console.log(authCode);
-
-    const state = urlParams.get('state');
-    console.log(state);
-
-
-    // Send authentication update to Amazon Connect
-    if (authCode && state) {
-      amazon_connect('updateParticipantAuthentication', {
-        code: authCode,
-        state: state
-      });
-    }
-
-    amazon_connect('registerCallback', {
-       'AUTHENTICATION_INITIATED' : (eventName, data) => {
-            console.log(data.state,'data')
-        },
-      });
-
+      w[x] =  w[x] || function() { (w[x].ac = w[x].ac || []).push(arguments) };
+    })(window, document, 'amazon_connect', '9fa75b53-ac33-45e4-9d39-fc946b034b39');
+    amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456'} });
+    amazon_connect('snippetId', 'QVFJREFIaXdlaTllQXR1SnQyK1JZc1Z3dWE3clBZQjQvWm15emlVb25scEltc3BJNmdIbDFrWng0QlFmSjk3bm1Id1VnWnRhQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNT2tMYjR5b0J2dWNzODEzSUFnRVFnQ3ZJQ3JvNmdtSElhdGN2b2ZTUTNUZG5Ta1V6NHA3b2xTV2dyNkdUMmh3OGFjM2YvMHVyOHRNQksxRTI6OkJFVVNMaHkwcXZDeDIwWDNTWVZXTVUybWtJTVYxNVlTbTErUmFCcUF1dkw1S3pkNzhTMW0xd2MvNXhSYTNHd3FSNGNtRm0yUEZXdGVSeXEvczU2MzlQK1cvbWZ3Qk5IL2lESHpRMC9QUHJvMDkzY3g2Z2Yrb0w5NUpCTG1VK3MvTlFWOXhqWGNxS0laSWc0aGprUHpaNE1VWWRsMVlYUT0=');
+    amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown', 'application/vnd.amazonaws.connect.message.interactive', 'application/vnd.amazonaws.connect.message.interactive.response' ]);
   </script>
 
 
