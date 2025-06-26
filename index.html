@@ -98,26 +98,6 @@
         identityProvider: 'COGNITO'
       });
 
-      amazon_connect('customLaunchBehavior', {
-        skipIconButtonAndAutoLaunch: true,
-        alwaysHideWidgetButton: true,
-        programmaticLaunch: (launchCallback) => {
-          const launchWidgetBtn = document.getElementById('launch-widget-btn');
-          if (launchWidgetBtn) {
-            launchWidgetBtn.addEventListener('click', () => {
-              console.log('Chat widget launch button clicked.');
-              launchCallback();
-            });
-            window.onunload = () => {
-              launchWidgetBtn.removeEventListener('click', launchCallback);
-            };
-          } else {
-            console.error('Launch widget button not found.');
-            displayError('Chat button not found. Please try again.');
-          }
-        }
-      });
-
       amazon_connect('onChatInitialized', () => {
         console.log('Chat initialized successfully.');
       });
@@ -219,7 +199,7 @@
       }
       if (event.data.type === 'COGNITO_AUTH_COMPLETE') {
         console.log('Received auth completion message from popup');
-        // Optionally verify authentication state before proceeding
+        // Optionally verify authentication state
       }
     });
 
@@ -239,7 +219,6 @@
       <p>Protect your home’s most valuable systems and appliances. Starting at $1/day.</p>
       <button>ENTER YOUR ZIP CODE</button>
       <button>CHECK OUR PRICES</button>
-      <button id="launch-widget-btn">Start Chat</button> <!-- Added for custom launch -->
     </div>
 
     <div class="contact-section">
