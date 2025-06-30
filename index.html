@@ -2,75 +2,144 @@
 <html lang="en">
 
 <head>
- 
-
-  <script>
-    (function (n, i, v, r, s, c, x, z) { x = window.AwsRumClient = { q: [], n: n, i: i, v: v, r: r, c: c }; window[n] = function (c, p) { x.q.push({ c: c, p: p }); }; z = document.createElement('script'); z.async = true; z.src = s; document.head.insertBefore(z, document.head.getElementsByTagName('script')[0]); })(
-      'cwr',
-      'd2d79b22-23df-4bb7-9b86-a0294e07bcf4',
-      '1.0.0',
-      'us-east-1',
-      'https://client.rum.us-east-1.amazonaws.com/1.13.6/cwr.js',
-      {
-        sessionSampleRate: 1,
-        guestRoleArn: "arn:aws:iam::382625484581:role/RUM-Monitor-us-east-1-382625484581-9467346556861-Unauth",
-        identityPoolId: "us-east-1:a18b344d-74fc-4759-aae9-e09be65e7c49",
-        endpoint: "https://dataplane.rum.us-east-1.amazonaws.com",
-        telemetries: ["performance", "errors", "http"],
-        allowCookies: true,
-        enableXRay: true
-      }
-    );
-  </script>
-  
-
-  <script>
-    setTimeout(function () {
-      var script = document.createElement('script');
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-72726HN0SL';
-      script.async = true;
-      document.head.appendChild(script);
-
-      script.onload = function () {
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-        gtag('config', 'G-72726HN0SL');
-      };
-    }, 5000); 
-  </script>
-
-
-  <script src="https://lhg-dev.cdn.leadgen.pennysaver.in/HostingSwapJS/932895671/swap.js"></script>
-
- 
-  <script type="text/javascript">
-    (function(w, d, x, id){
-      s=d.createElement('script');
-      s.src='https://athiva-liberty.my.connect.aws/connectwidget/static/amazon-connect-chat-interface-client.js';
-      s.async=1;
-      s.id=id;
-      d.getElementsByTagName('head')[0].appendChild(s);
-      w[x] =  w[x] || function() { (w[x].ac = w[x].ac || []).push(arguments) };
-    })(window, document, 'amazon_connect', '2bbef40d-4c62-4aaa-902e-f999367c5a58');
-    amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456'} });
-    amazon_connect('snippetId', 'QVFJREFIaWFZYXRVSlpIekdkUUg5YXhZenVQMktKRXNIWTVFQWpBYVErTEdzRnpvZHdFYkM5cU9Bc1NKeU9jRlZZM0hEM1pIQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNVjgwdlBWUjNrbVU5N3pUb0FnRVFnQ3VxbzVBbjk2bTBOQlgzdWM5eHdyWmVTQVRzT0RkakFyL3IzLzNDSmRDenBHU0NnYWtmZldaUWM4YTk6OldFbkhUOTJsZmpkWXRaL3ozSzdsN2ZOZS8rei81S2VhQklRdCtIYWhteXNER0hydVFFQ2QvalRxQk1Ub0kzcU1KQXZtUHQvZlVpU3l4Yms2OUN2S1ByMk9xK04xMCtaQXJIc1k3Um1oN1M1a2I0UGVZay9YSUtVWGZ1M1JzSFFQSFNsRjRlVHU1TEpaV0U0bWVFUDdwaHBKcyswZjQyUT0=');
-    amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown', 'application/vnd.amazonaws.connect.message.interactive', 'application/vnd.amazonaws.connect.message.interactive.response' ]);
-  </script>
-
-
- 
-
-
-
-  <link rel="stylesheet" href="styles.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us</title>
+  <link rel="stylesheet" href="styles.css">
+
+
+
+
+
+  <!-- Leadgen CDN -->
+  <script src="https://lhg-dev.cdn.leadgen.pennysaver.in/HostingSwapJS/932895671/swap.js"></script>
+
+  <!-- Amazon Connect Chat -->
+  <script type="text/javascript">
+    (function (w, d, x, id) {
+      const s = d.createElement('script');
+      s.src = 'https://athiva-liberty.my.connect.aws/connectwidget/static/amazon-connect-chat-interface-client.js';
+      s.async = 1;
+      s.id = id;
+      s.onload = () => console.log('Amazon Connect script loaded successfully');
+      s.onerror = () => console.error('Failed to load Amazon Connect script');
+      d.getElementsByTagName('head')[0].appendChild(s);
+      w[x] = w[x] || function () { (w[x].ac = w[x].ac || []).push(arguments) };
+    })(window, document, 'amazon_connect', '2bbef40d-4c62-4aaa-902e-f999367c5a58');
+
+    amazon_connect('styles', {
+      iconType: 'CHAT',
+      openChat: { color: '#ffffff', backgroundColor: '#123456' },
+      closeChat: { color: '#ffffff', backgroundColor: '#123456' }
+    });
+
+    amazon_connect('snippetId', 'QVFJREFIaWFZYXRVSlpIekdkUUg5YXhZenVQMktKRXNIWTVFQWpBYVErTEdzRnpvZHdFYkM5cU9Bc1NKeU9jRlZZM0hEM1pIQUFBQWJqQnNCZ2txaGtpRzl3MEJCd2FnWHpCZEFnRUFNRmdHQ1NxR1NJYjNEUUVIQVRBZUJnbGdoa2dCWlFNRUFTNHdFUVFNVjgwdlBWUjNrbVU5N3pUb0FnRVFnQ3VxbzVBbjk2bTBOQlgzdWM5eHdyWmVTQVRzT0RkakFyL3IzLzNDSmRDenBHU0NnYWtmZldaUWM4YTk6OldFbkhUOTJsZmpkWXRaL3ozSzdsN2ZOZS8rei81S2VhQklRdCtIYWhteXNER0hydVFFQ2QvalRxQk1Ub0kzcU1KQXZtUHQvZlVpU3l4Yms2OUN2S1ByMk9xK04xMCtaQXJIc1k3Um1oN1M1a2I0UGVZay9YSUtVWGZ1M1JzSFFQSFNsRjRlVHU1TEpaV0U0bWVFUDdwaHBKcyswZjQyUT0=');
+
+    amazon_connect('supportedMessagingContentTypes', [
+      'text/plain',
+      'text/markdown',
+      'application/vnd.amazonaws.connect.message.interactive',
+      'application/vnd.amazonaws.connect.message.interactive.response'
+    ]);
+
+    // Cognito Authentication Setup
+    amazon_connect('authenticationParameters', {
+      redirectUri: 'https://www.dev.chatbot.pennysaver.in', // Ensure this matches Cognito callback URL
+      identityProvider: 'COGNITO'
+    });
+
+    amazon_connect('registerCallback', {
+      'AUTHENTICATION_INITIATED': (eventName, data) => {
+        console.log('Auth initiated - opening popup:', data.signInUrl);
+        sessionStorage.setItem('cognitoAuthState', data.state);
+        const popup = window.open(data.signInUrl, 'cognitoAuthPopup', 'width=600,height=600');
+        if (!popup) {
+          console.error('Failed to open popup. Please allow popups for this site.');
+          alert('Please allow popups to authenticate.');
+        }
+      },
+      'AUTHENTICATION_SUCCESSFUL': (eventName, data) => {
+        console.log('Auth successful - user profile:', data);
+        amazon_connect('startChat', {
+          contactId: data.contactId || '',
+          participantId: data.participantId || ''
+        }, (response, error) => {
+          if (error) {
+            console.error('startChat failed:', error);
+            alert('Failed to start chat. Please try again.');
+          } else {
+            console.log('Chat started successfully:', response);
+          }
+        });
+      },
+      'AUTHENTICATION_FAILED': (eventName, data) => {
+        console.error('Auth failed:', data);
+        alert('Authentication failed. Please try again.');
+      }
+    });
+
+    // Handle Cognito redirect callback
+    window.addEventListener('load', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const authCode = urlParams.get('code');
+      const state = urlParams.get('state');
+      const error = urlParams.get('error');
+      const errorDescription = urlParams.get('error_description');
+      const storedState = sessionStorage.getItem('cognitoAuthState');
+
+      if (authCode && state) {
+        if (state !== storedState) {
+          console.error('State mismatch! Potential CSRF attack.', { received: state, expected: storedState });
+          alert('Authentication failed due to state mismatch.');
+          return;
+        }
+        console.log('Processing authentication callback with code:', authCode);
+        amazon_connect('updateParticipantAuthentication', {
+          Code: authCode,
+          State: state
+        }, (response, error) => {
+          if (error) {
+            console.error('updateParticipantAuthentication failed:', error);
+            alert('Failed to update authentication. Please try again.');
+            return;
+          }
+          console.log('updateParticipantAuthentication response:', response);
+          if (window.opener) {
+            window.opener.postMessage({
+              type: 'COGNITO_AUTH_COMPLETE',
+              success: true
+            }, 'https://www.dev.chatbot.pennysaver.in');
+            window.close();
+          } else {
+            window.location.href = 'https://www.dev.chatbot.pennysaver.in?auth=success';
+          }
+        });
+      } else if (error) {
+        console.error('Authentication error:', error, errorDescription);
+        amazon_connect('updateParticipantAuthentication', {
+          Error: error,
+          ErrorDescription: errorDescription || 'Authentication failed',
+          State: state || 'UNKNOWN_STATE'
+        }, (response, error) => {
+          if (error) {
+            console.error('updateParticipantAuthentication failed:', error);
+          }
+        });
+        alert(`Authentication failed: ${errorDescription || 'Unknown error'}`);
+      }
+    });
+
+    // Handle popup communication
+    window.addEventListener('message', (event) => {
+      if (event.origin !== 'https://www.dev.chatbot.pennysaver.in') {
+        console.warn('Invalid origin for message:', event.origin);
+        return;
+      }
+      if (event.data.type === 'COGNITO_AUTH_COMPLETE') {
+        console.log('Received auth completion message from popup');
+      }
+    });
+  </script>
 </head>
 
 <body>
@@ -92,20 +161,13 @@
       <button>Submit a Claim</button>
     </div>
     <div class="contact-section">
-      First American Home Warranty Pool <a class="number" href="tel:+18888750533">+1 888-875-0533</a>
-      <br>
-      Old Republic Insurance Group Pool <a class="number" href="tel:+18669284082">+1 866-928-4082</a>
-      <br>
-      Earl's Home Warranty <a class="number" href="tel:+18063292723">+1 806-329-2723</a>
-      <br>
-      Elite home warranties <a class="number" href="tel:+18883548398">+1 888-354-8398</a>
-      <br>
-      Cinch Home Services <a class="number" href="tel:+18443830859">+1 844-383-0859</a>
-      <br>
-      Dev Liberty Home Guard Pool <a class="number" href="tel:+19841677880">+1 984-167-7880</a>
-      <br>
-      American Home Shield Pool <a class="number" href="tel:+18553888085">+1 855-388-8085</a>
-      <br>
+      First American Home Warranty Pool <a class="number" href="tel:+18888750533">+1 888-875-0533</a><br>
+      Old Republic Insurance Group Pool <a class="number" href="tel:+18669284082">+1 866-928-4082</a><br>
+      Earl's Home Warranty <a class="number" href="tel:+18063292723">+1 806-329-2723</a><br>
+      Elite home warranties <a class="number" href="tel:+18883548398">+1 888-354-8398</a><br>
+      Cinch Home Services <a class="number" href="tel:+18443830859">+1 844-383-0859</a><br>
+      Dev Liberty Home Guard Pool <a class="number" href="tel:+19841677880">+1 984-167-7880</a><br>
+      American Home Shield Pool <a class="number" href="tel:+18553888085">+1 855-388-8085</a><br>
       2-10 Home Buyers Warranty Pool <a class="number" href="tel:+18004146780">+1 800-414-6780</a>
     </div>
 
@@ -116,34 +178,21 @@
       <p>*majority of claims have a technician on site within 24-48 business hours.</p>
     </div>
 
-
-
     <div class="contact-section">
       <h2>What is a Home Warranty?</h2>
       <p>A home warranty is a service contract that covers repair and replacement costs when your home’s systems and
-        appliances break down due to normal wear and tear. Liberty Home Guard oversees the process of repairing your
-        home equipment from start to finish. Our network of state-licensed technicians ensures you have access to the
-        highest quality workmanship and technical expertise.</p>
-      <p>A home warranty is an excellent complement to standard homeowner’s insurance. Insurance typically covers
-        damages resulting from disaster, accident, or theft. It does not cover appliance breakdowns, home system repair,
-        or home maintenance services—such coverage is the domain of home warranties. A homeowner with both a home
-        warranty and home insurance policy enjoys more thorough and robust financial protection.</p>
-      <p>A home warranty is especially useful when a big-ticket item, such as a furnace or refrigerator, breaks down.
-        Without financial protection, such major appliances can cost several hundreds or thousands of dollars to repair.
-        A home warranty protects you from such exorbitant out-of-pocket expenses. A Liberty Home Guard plan can be yours
-        for as little as $1 per day. Our coverage does not require an inspection of your home’s systems and appliances,
-        and we’ll cover virtually any working appliance, regardless of age.</p>
+        appliances break down due to normal wear and tear...</p>
     </div>
   </div>
 
   <div class="footer">
     <p>
-      &copy; 2023 Your Website. All rights reserved. |
+      © 2023 Your Website. All rights reserved. |
       <a href="#">Privacy Policy</a> |
       <a href="#">Terms of Service</a> |
       Contact Us:
-      Test Number 1<a class="number" href="tel:+19841677880">+1 984-167-7880</a>
-      Test Number 2<a class="number" href="tel:+19092307075">+1 909-230-7075</a>
+      Test Number 1 <a class="number" href="tel:+19841677880">+1 984-167-7880</a>
+      Test Number 2 <a class="number" href="tel:+19092307075">+1 909-230-7075</a>
     </p>
   </div>
 </body>
